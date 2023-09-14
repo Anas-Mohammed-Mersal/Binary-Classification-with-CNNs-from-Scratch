@@ -3,6 +3,8 @@ import tensorflow as tf
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from keras.optimizers import SGD
+
 
 # Load and preprocess your image dataset.
 # Make sure your dataset is organized into two folders: one for genuine images and one for counterfeit images.
@@ -58,8 +60,9 @@ model = keras.Sequential(
     ]
 )
 
+
 # Compile the model
-model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+model.compile(optimizer=SGD(lr=0.01), loss="binary_crossentropy", metrics=["accuracy"])
 
 
 history = model.fit(train_generator, epochs=10, validation_data=validation_generator)
